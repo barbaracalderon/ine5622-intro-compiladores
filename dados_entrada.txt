@@ -1,0 +1,1 @@
+"{   int SM[12.3]; SM[123] = A + B;   &SM[tartaruga] = B * C;    return;    }"
