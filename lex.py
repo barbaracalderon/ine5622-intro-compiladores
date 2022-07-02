@@ -28,7 +28,7 @@ reserved = {
 
 tokens = ['LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES', 'RCOLCHETES', 'ATRIBUICAO', 'MENOR',
           'MENORIGUAL', 'IGUAL','DIFERENTE', 'MAIOR', 'MAIORIGUAL', 'SOMA', 'SUBTRACAO', 'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT',
-          'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT']+ list(reserved.values())
+          'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT'] + list(reserved.values())
 
 t_ignore            = r' \t'
 t_DEF               = r'def'
@@ -64,16 +64,19 @@ t_MULTIPLICACAO     = r'\*'
 t_DIVISAO           = r'/'
 t_RESTO             = r'%'
 
+
 def t_IDENT(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    if t.value in reserved:# Verifica se está nas palavras reservadas.
+    if t.value in reserved:  # Verifica se está nas palavras reservadas.
         t.type = reserved[t.value]
     return t
+
 
 def t_FLOAT_CONSTANT(t):
     r'\d+[.]\d*|\d*[.]\d+'    # digito+.digito* | digito*.digito+
     t.value = float(t.value)
     return t
+
 
 def t_INT_CONSTANT(t):
     r'\d+'
@@ -110,7 +113,17 @@ lexer = lex.lex()
 print('Começando leitura dos dados de entrada.')
 
 # Test it out
-data = "{   int SM[12.3]; SM[123] = A + B;   &SM[tartaruga] = B * C;    return;    }"
+# data = "{   int SM[12.3]; SM[123] = A + B;   &SM[tartaruga] = B * C;    return;    }"
+
+
+def read_data():
+    with open("dados_entrada.txt", mode="r", encoding="utf-8") as file:
+        data = file.read()
+        return data
+
+
+data = read_data()
+print(f'data: {data}')
 
 # Give the lexer some input
 lexer.input(data)
