@@ -26,8 +26,9 @@ reserved = {
     'null'      :   'NULL'
 }
 
-tokens = ['LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES', 'RCOLCHETES', 'ATRIBUICAO', 'MENOR',
-          'MENORIGUAL', 'IGUAL','DIFERENTE', 'MAIOR', 'MAIORIGUAL', 'SOMA', 'SUBTRACAO', 'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT',
+tokens = ['LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES',
+          'RCOLCHETES', 'ATRIBUICAO', 'MENOR', 'MENORIGUAL', 'IGUAL', 'DIFERENTE', 'MAIOR',
+          'MAIORIGUAL', 'SOMA', 'SUBTRACAO', 'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT',
           'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT'] + list(reserved.values())
 
 t_ignore            = r' \t'
@@ -86,7 +87,7 @@ def t_INT_CONSTANT(t):
 
 def t_STRING_CONSTANT(t):
     #r'\"([^\\\n]|(\\.))*?\"'    # "letra*"
-    r'\"\w\"'
+    r'"\w\"'
     return t
 
 '''
@@ -99,6 +100,18 @@ def t_newline(t):
 # A string containing ignored characters (spaces and tabs)
 # Vide t_ignore
 
+literals = ["'", '"']
+
+def t_squotation(t):    # Single quotation
+    r"\'"
+    t.type = "'"
+    return t
+
+def t_dquotation(t):    # Double quotation
+    r'"'
+    t.type = '"'
+    return t
+
 # Error handling rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -110,7 +123,7 @@ if __name__ == '__main__':
 '''
 
 lexer = lex.lex()
-print('Começando leitura dos dados de entrada.')
+print('Começando leitura dos dados de entrada...')
 
 # Test it out
 # data = "{   int SM[12.3]; SM[123] = A + B;   &SM[tartaruga] = B * C;    return;    }"
@@ -118,12 +131,12 @@ print('Começando leitura dos dados de entrada.')
 
 def read_data():
     with open("dados_entrada.txt", mode="r", encoding="utf-8") as file:
-        data = file.read()
-        return data
+        dados = file.read()
+        return dados
 
 
 data = read_data()
-print(f'data: {data}')
+print(f'Dados de entrada: {data}')
 
 # Give the lexer some input
 lexer.input(data)
