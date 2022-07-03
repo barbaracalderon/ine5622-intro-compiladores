@@ -102,15 +102,15 @@ def t_newline(t):
 
 literals = ["'", '"']
 
-def t_squotation(t):    # Single quotation
-    r"\'"
-    t.type = "'"
-    return t
-
-def t_dquotation(t):    # Double quotation
-    r'"'
-    t.type = '"'
-    return t
+# def t_squotation(t):    # Single quotation
+#     r"\'"
+#     t.type = "'"
+#     return t
+#
+# def t_dquotation(t):    # Double quotation
+#     r'"'
+#     t.type = '"'
+#     return t
 
 # Error handling rule
 def t_error(t):
