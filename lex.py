@@ -31,7 +31,7 @@ tokens = ['LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 
           'MAIORIGUAL', 'SOMA', 'SUBTRACAO', 'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT',
           'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT'] + list(reserved.values())
 
-t_ignore            = r' \t'
+t_ignore            = ' \t'
 t_DEF               = r'def'
 t_INT               = r'int'
 t_FLOAT             = r'float'
