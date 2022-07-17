@@ -1,1 +1,7 @@
-"{   int SM[12.3]; SM[123] = A + B;   &SM[tartaruga] = B * C;    return;    }"
+" def func1 ( int A , int B )
+{
+int SM [2];
+SM [0] = A + B ;
+SM [1] = B * C ;
+return ;
+} "
