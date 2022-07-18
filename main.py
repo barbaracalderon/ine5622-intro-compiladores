@@ -2,7 +2,7 @@ import sys
 sys.path.append("../..")
 
 from sintatica import *
-from lexica import *
+from lex import *
 
 
 # Leitura do arquivo de dados
