@@ -135,4 +135,4 @@ def analyse_lex(data):
     print('TABELA DE SÍMBOLOS:')
     for tup in tabela_simbolo:
         print(tup)
-    return tabela_simbolo
+    print('\n')
