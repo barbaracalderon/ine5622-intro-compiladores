@@ -126,11 +126,16 @@ def analyse_lex(data):
     for tok in lexer:
         print(f'tok: {tok}')
         if tok.type == 'IDENT':
-            tup = (tok.value, cont)
+            tup = [tok.value, cont, []]
             if tup[0] not in tabela_check:
                 cont += 1
                 tabela_check.append(tup[0])
+                tup[2].append(tok.lineno)
                 tabela_simbolo.append(tup)
+            else:
+                for tup in tabela_simbolo:
+                    if tok.value in tup:
+                        tup[2].append(tok.lineno)
     print('\n')
     print('TABELA DE SÍMBOLOS:')
     for tup in tabela_simbolo:
