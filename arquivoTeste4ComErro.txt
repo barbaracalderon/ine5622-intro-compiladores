@@ -1,0 +1,8 @@
+def func22 ( int A )
+{
+    for ( A = 0 ; + 1 ; A = 20 ) {
+      A = A - 1 $ X = 30 ;
+	  } ;
+	  print ( A ) ;
+    return ;
+}

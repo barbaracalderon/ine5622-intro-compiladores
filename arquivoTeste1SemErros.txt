@@ -1,0 +1,100 @@
+def func1 ( int A , int B , int C , int D )
+{ 
+	int SM [ 6 ] ;
+	SM [ 0 ] = A + B ;
+	print ( SM [ 0 ] ) ;
+	SM [ 1 ] = B * C ;
+	print ( SM [ 1 ] ) ;
+	SM [ 2 ] = B / C ;
+	print ( SM [ 2 ] ) ;
+	SM [ 3 ] = A * B ;
+	print ( SM [ 3 ] ) ;
+	SM [ 4 ] = C % D ;
+	print ( SM [ 4 ] ) ;
+	SM [ 5 ] = A - B ;
+	print ( SM [ 5 ] ) ;
+	SM [ 6 ] = ( A + B ) - ( C + D ) ;
+	print ( SM [ 6 ] ) ;
+	print ( SM ) ;
+	return ;
+}
+
+def func2 ( int A , int B )
+{ 
+	print ( A ) ;
+	print ( B ) ;
+	C = A + B ;
+	print ( C ) ;
+	break ;
+	return ;
+}
+
+def func3 ( int A , int B, int C )
+{
+    float N ; 
+		A = 10 ; 
+		B =  8 ;
+		N = 10 / 8 ;
+		C = 6 ; 
+	float M ;
+		M = N * C ;
+	print ( A ) ;
+	print ( B ) ;
+	print ( C ) ;
+	print ( N ) ;
+	print ( M ) ;
+    return ; 
+}
+
+def func4 ( int A )
+{
+    for ( A = 0 ; + 1 ; A = 20 ) {
+      A = A - 1 ;
+	  } ;
+	  print ( A ) ;
+    return ;
+}
+
+def func5 ( int A , int B , int C , int D )
+{ 
+	N = A - B ;
+	M = C - D ;
+	if ( N < M ) { 
+	N = 10 ; 
+	} 
+	else { 
+	N = 8 ; 
+	} ;
+	print ( N ) ;
+	print ( M ) ;
+	return ;
+}
+
+def fun6 ( int A , int B , int C , int D )
+{
+	N = A * B ;
+	M = C * D ;
+	if ( N >= M ) {
+		N = maior ;
+    } 
+	else {
+		N = menor ;
+	} ;
+	print ( N ) ;
+	print ( M ) ;
+	return ;
+}
+
+def principal ( )
+{
+	int X ;
+	int Z ;
+	int W ;
+	int T ;
+	int Y ;
+	X = 4 ;
+	Z = 5 ;
+	W = 10 ;
+	T = 8 ;
+	return ;
+}

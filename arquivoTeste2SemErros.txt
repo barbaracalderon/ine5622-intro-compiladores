@@ -1,0 +1,111 @@
+def fun7 ( int A , int B , int C , int D )
+{
+	N = A % B ;
+	M = C % D ;
+	if ( N != M ) {
+		M = diferente ;
+	} 
+	else {
+		M = igual ;
+	} ;
+	print ( M ) ;
+	return ;
+}
+
+def func8 ( string A , string B , string C )
+{
+	print ( A ) ;
+	print ( B ) ;
+	print ( C ) ;
+	return ; 
+}
+
+def func9 ( int A )
+{	
+	if ( A == null ) {
+		print ( null ) ; 
+		}
+		else {
+			print ( A ) ;
+		} ;
+	return ; 			
+}
+
+def func10 ( string A , string B , string C , string D , string E ) 
+{
+	read A ;
+	read B ;
+	read C ;
+	read D ;
+	read E ;
+	print ( A ) ;
+	print ( B ) ;
+	print ( c ) ;
+	print ( D ) ;
+	print ( E ) ;
+	return ; 
+}
+
+def func11 ( int N , int M ) 
+{
+	i = 0 ;
+	for ( i = 0 ; + 2 ; i = 10 ) {  
+		N = N + 5 ;
+		} ;
+	
+	j = 0 ;
+	for ( j = 0 ; + 2 ; j = 10 ) {
+		M = M + 5 ;
+		} ;
+	
+	print ( N ) ;
+	print ( M ) ;
+	return ;
+}
+
+def func12 ( string A , string B , string C , string D , string E ) 
+{
+	texto1 = A ;
+	print ( texto1 ) ;
+	texto2 = B ;
+	print ( texto2 ) ;
+	texto3 = C ;
+	print ( texto3 ) ;
+	texto4 = D ;
+	print ( texto4 ) ;
+	texto5 = E ;
+	print ( texto5 ) ;
+	return ; 
+}
+
+def func13 ( int A )
+{
+	resultado = 1 + n ;
+	limite = (n / 2) + 1 ;
+	for ( i = 10 ; -1 ; i = 0 ) {
+		if ( n % i == 0 ) {
+			resultado = resultado + i ;
+			} ;
+		} ;
+   return ;
+ }
+ 
+ def principal ( )
+{
+	int X ;
+	int W ;
+	int T ;
+	int V ;
+	int U ;
+	string Z1 ;
+	string Z2 ;
+	string Z3 ;
+	string Z4 ;
+	string Z5 ;
+	X = 4 ;
+	W = 10 ;
+	T = 8 ;
+	V = 6 ;
+	U = 3 ;
+	return ;
+}

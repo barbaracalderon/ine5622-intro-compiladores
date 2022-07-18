@@ -1,0 +1,112 @@
+def func14 ( int n )
+{
+	resultado = n + 1 ;
+	limite = ( n / 2 ) + 1 ;
+	for ( i = 0 ; + 2 ; i = resultado ) {
+      if ( n % 2 == 0 ) {
+        resultado = resultado + 1 ;
+		} ;
+	} ;
+	print ( resultado ) ;
+	return ;
+}
+
+def func15 ( int n1, int n2 )
+{
+   n3 = n1 % n2 ;
+   for ( n3 = 30 ; -1 ; n3 = 0 ) {
+      n1 = n2 ;
+      n2 = n3 ;
+      n3 = n1 % n2 ;
+	} ;
+	print ( n3 ) ;
+    return ;
+}
+
+def func16 ( int num, int base )
+{
+    resposta = True ;
+    resto = num % base ;
+    for ( resto = 0 ; +1 ; resto = 1 ) {
+		for ( num = 1 ; +1 ; num = 10 ) {
+        num = num / base ;
+        resto = num % base ;
+		} ;
+	} ;
+    if ( num > 1 ) {
+        resposta = False ;
+	} ;
+	print ( resposta ) ;
+    return ;   
+} 
+
+def func17 ( int numeros, int n )
+{
+  int L1 [ 8 ] ;
+  for ( numero = 0 ; + 1 ; numero = 8 ) {
+		if ( numero > n ) {
+		soma = soma + numero ;
+		} ; 
+	} ;
+	print ( L1 ) ;
+  return ;
+}
+
+def func18 ( int n1 , int n2 , int n3 , int t1 )
+{
+    print ( t1 ) ;
+    menor = n1 ;
+    if ( n2 < n1 ) {
+        menor = n2 ;
+        if ( menor < n3 ) {
+            menor = n3 ;
+			} ;
+		} ;
+    return ;
+}
+
+def fun19 ( int n1, int n2, int n3 )
+{
+	print ( n1 ) ;
+	print ( n2 ) ;
+	print ( n3 ) ;
+	resposta =  ( n1 + n2 + n3 )  / 3 ;
+	print ( resposta ) ;
+    return ;
+}
+
+def func20 ( int n1 , int n2 , int n3 ) 
+{
+	print ( n1 ) ;
+	print ( n2 ) ;
+	print ( n3 ) ;
+	resposta = n1 + n2 + n3 ; 
+	print ( resposta ) ;
+    return ;
+}
+
+def func21 ( int n )
+{
+	print ( n ) ;
+	resposta = n % 2 == 0 ;
+	print ( resposta ) ;
+	return ; 
+}
+
+def principal ( ) 
+{
+  int X ;
+  int W ;
+  int T ;
+  int V ;
+  int U ;
+  string Z1 ;
+  string Z2 ;
+  string Z3 ;
+  X = 4 ;
+  W = 10 ;
+  T = 8 ;
+  V = 6 ;
+  U = 3 ;
+  return ; 
+}
