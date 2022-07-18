@@ -7,6 +7,7 @@ reserved = {
     'string'    :   'STRING',
     'break'     :   'BREAK',
     'print'     :   'PRINT',
+    'call'      :   'CALL',
     'read'      :   'READ',
     'return'    :   'RETURN',
     'if'        :   'IF',
@@ -14,13 +15,12 @@ reserved = {
     'for'       :   'FOR',
     'new'       :   'NEW',
     'null'      :   'NULL',
-    'call'      :   'CALL'
 }
 
-tokens = ('LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES', 'RCOLCHETES', 'ATRIBUICAO', 'MENOR',
-          'MENORIGUAL', 'IGUAL','DIFERENTE', 'MAIOR', 'MAIORIGUAL', 'SOMA', 'SUBTRACAO', 'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT',
-          'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT', 'DEF', 'INT', 'FLOAT', 'STRING', 'BREAK', 'PRINT', 'READ', 'RETURN',
-          'IF', 'ELSE', 'FOR', 'NEW', 'NULL', 'CALL')
+tokens = ('LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES', 'RCOLCHETES',
+          'ATRIBUICAO', 'MENOR', 'MENORIGUAL', 'IGUAL', 'DIFERENTE', 'MAIOR', 'MAIORIGUAL', 'SOMA', 'SUBTRACAO',
+          'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT', 'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT', 'DEF',
+          'INT', 'FLOAT', 'STRING', 'BREAK', 'PRINT', 'READ', 'RETURN', 'IF', 'ELSE', 'FOR', 'NEW', 'NULL', 'CALL')
         #   + list(reserved.values())
 
 t_ignore            = ' \t'
@@ -59,6 +59,7 @@ t_MULTIPLICACAO     = r'\*'
 t_DIVISAO           = r'/'
 t_RESTO             = r'%'
 
+
 def t_IDENT(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     # if t.value in reserved:# Verifica se está nas palavras reservadas.
@@ -66,20 +67,24 @@ def t_IDENT(t):
     t.type = reserved.get(t.value, 'IDENT')
     return t
 
+
 def t_FLOAT_CONSTANT(t):
     r'\d+[.]\d*|\d*[.]\d+'    # digito+.digito* | digito*.digito+
     t.value = float(t.value)
     return t
+
 
 def t_INT_CONSTANT(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
+
 def t_STRING_CONSTANT(t):
     #r'\"([^\\\n]|(\\.))*?\"'    # "letra*"
     r'\"\w\"'
     return t
+
 
 # Definição de uma regra para encontrar o número da linha.
 def t_newline(t):
@@ -89,10 +94,12 @@ def t_newline(t):
 # A string containing ignored characters (spaces and tabs)
 # Vide t_ignore
 
+
 # Error handling rule
 def t_error(t):
     print(f'Illegal character {t.value[0]!r}')
     t.lexer.skip(1)
+
 
 # Build the lexer object
 lexer = lex()
@@ -104,6 +111,7 @@ lexer = lex()
 
 # for tok in lexer:
 #     print(tok)
+
 
 def analyse_lex(data):
   lexer.input(data)
