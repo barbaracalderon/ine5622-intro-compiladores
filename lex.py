@@ -123,19 +123,28 @@ def analyse_lex(data):
     tabela_check = []
     cont = 1
     print('\nANÁLISE LÉXICA:\n')
+    print(f'lexer: {lexer}')
     for tok in lexer:
-        print(f'tok: {tok}')
+        print(tok)
+        # print(f'tok: {tok}')
+        # print(f'tok.type: {tok.type}')          # default: name following the t_prefix
+        # print(f'tok.value: {tok.value}')        # é o lexema
+        # print(f'tok.lineno: {tok.lineno}')      # número da linha atual
+        # print(f'tok.lexpos: {tok.lexpos}')      # localização do token (o index é relativo ao início do input texto
+        # print(f'-----')
         if tok.type == 'IDENT':
-            tup = [tok.value, cont, []]
+            tup = [tok.value, cont, [], []]
             if tup[0] not in tabela_check:
                 cont += 1
                 tabela_check.append(tup[0])
                 tup[2].append(tok.lineno)
+                tup[3].append(tok.lexpos)
                 tabela_simbolo.append(tup)
             else:
                 for tup in tabela_simbolo:
                     if tok.value in tup:
                         tup[2].append(tok.lineno)
+                        tup[3].append(tok.lexpos)
     print('\n')
     print('TABELA DE SÍMBOLOS:')
     for tup in tabela_simbolo:
