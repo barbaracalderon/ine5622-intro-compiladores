@@ -266,4 +266,3 @@ def parse(data):
     parser.parse(data)
     if (e.sem_erros):
         print('Não foram detectados erros sintáticos')
-    

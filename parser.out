@@ -1,0 +1,2945 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement
+Rule 2     program -> funclist
+Rule 3     program -> epsilon
+Rule 4     funclist -> funcdef funclist2
+Rule 5     funclist2 -> funclist
+Rule 6     funclist2 -> epsilon
+Rule 7     funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES
+Rule 8     paramlist -> INT IDENT paramlist2
+Rule 9     paramlist -> FLOAT IDENT paramlist2
+Rule 10    paramlist -> STRING IDENT paramlist2
+Rule 11    paramlist -> epsilon
+Rule 12    paramlist2 -> VIRGULA paramlist
+Rule 13    paramlist2 -> epsilon
+Rule 14    statement -> vardecl PONTO_VIRGULA
+Rule 15    statement -> atribstat PONTO_VIRGULA
+Rule 16    statement -> printstat PONTO_VIRGULA
+Rule 17    statement -> readstat PONTO_VIRGULA
+Rule 18    statement -> returnstat PONTO_VIRGULA
+Rule 19    statement -> ifstat
+Rule 20    statement -> forstat
+Rule 21    statement -> LCHAVES statelist RCHAVES
+Rule 22    statement -> BREAK PONTO_VIRGULA
+Rule 23    statement -> PONTO_VIRGULA
+Rule 24    vardecl -> INT IDENT a
+Rule 25    vardecl -> FLOAT IDENT a
+Rule 26    vardecl -> STRING IDENT a
+Rule 27    a -> LCOLCHETES INT_CONSTANT RCOLCHETES a
+Rule 28    a -> epsilon
+Rule 29    atribstat -> lvalue ATRIBUICAO atribstat2
+Rule 30    atribstat2 -> expression
+Rule 31    atribstat2 -> allocexpression
+Rule 32    atribstat2 -> funccall
+Rule 33    funccall -> CALL IDENT LPAREN paramlistcall RPAREN
+Rule 34    paramlistcall -> IDENT paramlistcall2
+Rule 35    paramlistcall -> epsilon
+Rule 36    paramlistcall2 -> VIRGULA paramlistcall
+Rule 37    paramlistcall2 -> epsilon
+Rule 38    printstat -> PRINT expression
+Rule 39    readstat -> READ lvalue
+Rule 40    returnstat -> RETURN
+Rule 41    ifstat -> IF LPAREN expression RPAREN statement ifstat2
+Rule 42    ifstat2 -> ELSE statement PONTO_VIRGULA
+Rule 43    ifstat2 -> PONTO_VIRGULA
+Rule 44    forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+Rule 45    statelist -> statement statelist2
+Rule 46    statelist2 -> statelist
+Rule 47    statelist2 -> epsilon
+Rule 48    allocexpression -> NEW allocexpression2
+Rule 49    allocexpression2 -> INT e
+Rule 50    allocexpression2 -> FLOAT e
+Rule 51    allocexpression2 -> STRING e
+Rule 52    e -> LCOLCHETES numexpression RCOLCHETES e2
+Rule 53    e2 -> e
+Rule 54    e2 -> epsilon
+Rule 55    expression -> numexpression expression2
+Rule 56    expression2 -> MENOR numexpression
+Rule 57    expression2 -> MAIOR numexpression
+Rule 58    expression2 -> MENORIGUAL numexpression
+Rule 59    expression2 -> MAIORIGUAL numexpression
+Rule 60    expression2 -> IGUAL numexpression
+Rule 61    expression2 -> DIFERENTE numexpression
+Rule 62    expression2 -> epsilon
+Rule 63    numexpression -> term d
+Rule 64    d -> SOMA term d
+Rule 65    d -> SUBTRACAO term d
+Rule 66    d -> epsilon
+Rule 67    term -> unaryexpr b
+Rule 68    b -> MULTIPLICACAO unaryexpr b
+Rule 69    b -> DIVISAO unaryexpr b
+Rule 70    b -> RESTO unaryexpr b
+Rule 71    b -> epsilon
+Rule 72    unaryexpr -> SOMA factor
+Rule 73    unaryexpr -> SUBTRACAO factor
+Rule 74    unaryexpr -> factor
+Rule 75    factor -> INT_CONSTANT
+Rule 76    factor -> FLOAT_CONSTANT
+Rule 77    factor -> STRING_CONSTANT
+Rule 78    factor -> NULL
+Rule 79    factor -> lvalue
+Rule 80    factor -> LPAREN numexpression RPAREN
+Rule 81    lvalue -> IDENT c
+Rule 82    c -> LCOLCHETES numexpression RCOLCHETES c
+Rule 83    c -> epsilon
+Rule 84    epsilon -> <empty>
+
+Terminals, with rules where they appear
+
+ATRIBUICAO           : 29
+BREAK                : 22
+CALL                 : 33
+DEF                  : 7
+DIFERENTE            : 61
+DIVISAO              : 69
+ELSE                 : 42
+FLOAT                : 9 25 50
+FLOAT_CONSTANT       : 76
+FOR                  : 44
+IDENT                : 7 8 9 10 24 25 26 33 34 81
+IF                   : 41
+IGUAL                : 60
+INT                  : 8 24 49
+INT_CONSTANT         : 27 75
+LCHAVES              : 7 21
+LCOLCHETES           : 27 52 82
+LPAREN               : 7 33 41 44 80
+MAIOR                : 57
+MAIORIGUAL           : 59
+MENOR                : 56
+MENORIGUAL           : 58
+MULTIPLICACAO        : 68
+NEW                  : 48
+NULL                 : 78
+PONTO_VIRGULA        : 14 15 16 17 18 22 23 42 43 44 44
+PRINT                : 38
+RCHAVES              : 7 21
+RCOLCHETES           : 27 52 82
+READ                 : 39
+RESTO                : 70
+RETURN               : 40
+RPAREN               : 7 33 41 44 80
+SOMA                 : 64 72
+STRING               : 10 26 51
+STRING_CONSTANT      : 77
+SUBTRACAO            : 65 73
+VIRGULA              : 12 36
+error                : 
+
+Nonterminals, with rules where they appear
+
+a                    : 24 25 26 27
+allocexpression      : 31
+allocexpression2     : 48
+atribstat            : 15 44 44
+atribstat2           : 29
+b                    : 67 68 69 70
+c                    : 81 82
+d                    : 63 64 65
+e                    : 49 50 51 53
+e2                   : 52
+epsilon              : 3 6 11 13 28 35 37 47 54 62 66 71 83
+expression           : 30 38 41 44
+expression2          : 55
+factor               : 72 73 74
+forstat              : 20
+funccall             : 32
+funcdef              : 4
+funclist             : 2 5
+funclist2            : 4
+ifstat               : 19
+ifstat2              : 41
+lvalue               : 29 39 79
+numexpression        : 52 55 56 57 58 59 60 61 80 82
+paramlist            : 7 12
+paramlist2           : 8 9 10
+paramlistcall        : 33 36
+paramlistcall2       : 34
+printstat            : 16
+program              : 0
+readstat             : 17
+returnstat           : 18
+statelist            : 7 21 46
+statelist2           : 45
+statement            : 1 41 42 44 45
+term                 : 63 64 65
+unaryexpr            : 67 68 69 70
+vardecl              : 14
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement
+    (2) program -> . funclist
+    (3) program -> . epsilon
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (4) funclist -> . funcdef funclist2
+    (84) epsilon -> .
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (7) funcdef -> . DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    $end            reduce using rule 84 (epsilon -> .)
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    DEF             shift and go to state 26
+    IDENT           shift and go to state 17
+
+    program                        shift and go to state 1
+    statement                      shift and go to state 2
+    funclist                       shift and go to state 3
+    epsilon                        shift and go to state 4
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    funcdef                        shift and go to state 15
+    lvalue                         shift and go to state 20
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement .
+
+    $end            reduce using rule 1 (program -> statement .)
+
+
+state 3
+
+    (2) program -> funclist .
+
+    $end            reduce using rule 2 (program -> funclist .)
+
+
+state 4
+
+    (3) program -> epsilon .
+
+    $end            reduce using rule 3 (program -> epsilon .)
+
+
+state 5
+
+    (14) statement -> vardecl . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 27
+
+
+state 6
+
+    (23) statement -> PONTO_VIRGULA .
+
+    $end            reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    BREAK           reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    INT             reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    FLOAT           reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    STRING          reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    PRINT           reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    READ            reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    RETURN          reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    IF              reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    FOR             reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    IDENT           reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 23 (statement -> PONTO_VIRGULA .)
+    ELSE            reduce using rule 23 (statement -> PONTO_VIRGULA .)
+
+
+state 7
+
+    (15) statement -> atribstat . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 28
+
+
+state 8
+
+    (16) statement -> printstat . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 29
+
+
+state 9
+
+    (17) statement -> readstat . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 30
+
+
+state 10
+
+    (18) statement -> returnstat . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 31
+
+
+state 11
+
+    (19) statement -> ifstat .
+
+    $end            reduce using rule 19 (statement -> ifstat .)
+    LCHAVES         reduce using rule 19 (statement -> ifstat .)
+    BREAK           reduce using rule 19 (statement -> ifstat .)
+    PONTO_VIRGULA   reduce using rule 19 (statement -> ifstat .)
+    INT             reduce using rule 19 (statement -> ifstat .)
+    FLOAT           reduce using rule 19 (statement -> ifstat .)
+    STRING          reduce using rule 19 (statement -> ifstat .)
+    PRINT           reduce using rule 19 (statement -> ifstat .)
+    READ            reduce using rule 19 (statement -> ifstat .)
+    RETURN          reduce using rule 19 (statement -> ifstat .)
+    IF              reduce using rule 19 (statement -> ifstat .)
+    FOR             reduce using rule 19 (statement -> ifstat .)
+    IDENT           reduce using rule 19 (statement -> ifstat .)
+    RCHAVES         reduce using rule 19 (statement -> ifstat .)
+    ELSE            reduce using rule 19 (statement -> ifstat .)
+
+
+state 12
+
+    (20) statement -> forstat .
+
+    $end            reduce using rule 20 (statement -> forstat .)
+    LCHAVES         reduce using rule 20 (statement -> forstat .)
+    BREAK           reduce using rule 20 (statement -> forstat .)
+    PONTO_VIRGULA   reduce using rule 20 (statement -> forstat .)
+    INT             reduce using rule 20 (statement -> forstat .)
+    FLOAT           reduce using rule 20 (statement -> forstat .)
+    STRING          reduce using rule 20 (statement -> forstat .)
+    PRINT           reduce using rule 20 (statement -> forstat .)
+    READ            reduce using rule 20 (statement -> forstat .)
+    RETURN          reduce using rule 20 (statement -> forstat .)
+    IF              reduce using rule 20 (statement -> forstat .)
+    FOR             reduce using rule 20 (statement -> forstat .)
+    IDENT           reduce using rule 20 (statement -> forstat .)
+    RCHAVES         reduce using rule 20 (statement -> forstat .)
+    ELSE            reduce using rule 20 (statement -> forstat .)
+
+
+state 13
+
+    (21) statement -> LCHAVES . statelist RCHAVES
+    (45) statelist -> . statement statelist2
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    statelist                      shift and go to state 32
+    statement                      shift and go to state 33
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 14
+
+    (22) statement -> BREAK . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 34
+
+
+state 15
+
+    (4) funclist -> funcdef . funclist2
+    (5) funclist2 -> . funclist
+    (6) funclist2 -> . epsilon
+    (4) funclist -> . funcdef funclist2
+    (84) epsilon -> .
+    (7) funcdef -> . DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES
+
+    $end            reduce using rule 84 (epsilon -> .)
+    DEF             shift and go to state 26
+
+    funcdef                        shift and go to state 15
+    funclist2                      shift and go to state 35
+    funclist                       shift and go to state 36
+    epsilon                        shift and go to state 37
+
+state 16
+
+    (24) vardecl -> INT . IDENT a
+
+    IDENT           shift and go to state 38
+
+
+state 17
+
+    (81) lvalue -> IDENT . c
+    (82) c -> . LCOLCHETES numexpression RCOLCHETES c
+    (83) c -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 40
+    ATRIBUICAO      reduce using rule 84 (epsilon -> .)
+    MULTIPLICACAO   reduce using rule 84 (epsilon -> .)
+    DIVISAO         reduce using rule 84 (epsilon -> .)
+    RESTO           reduce using rule 84 (epsilon -> .)
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    c                              shift and go to state 39
+    epsilon                        shift and go to state 41
+
+state 18
+
+    (25) vardecl -> FLOAT . IDENT a
+
+    IDENT           shift and go to state 42
+
+
+state 19
+
+    (26) vardecl -> STRING . IDENT a
+
+    IDENT           shift and go to state 43
+
+
+state 20
+
+    (29) atribstat -> lvalue . ATRIBUICAO atribstat2
+
+    ATRIBUICAO      shift and go to state 44
+
+
+state 21
+
+    (38) printstat -> PRINT . expression
+    (55) expression -> . numexpression expression2
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    expression                     shift and go to state 45
+    numexpression                  shift and go to state 46
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 22
+
+    (39) readstat -> READ . lvalue
+    (81) lvalue -> . IDENT c
+
+    IDENT           shift and go to state 17
+
+    lvalue                         shift and go to state 58
+
+state 23
+
+    (40) returnstat -> RETURN .
+
+    PONTO_VIRGULA   reduce using rule 40 (returnstat -> RETURN .)
+
+
+state 24
+
+    (41) ifstat -> IF . LPAREN expression RPAREN statement ifstat2
+
+    LPAREN          shift and go to state 59
+
+
+state 25
+
+    (44) forstat -> FOR . LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+
+    LPAREN          shift and go to state 60
+
+
+state 26
+
+    (7) funcdef -> DEF . IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES
+
+    IDENT           shift and go to state 61
+
+
+state 27
+
+    (14) statement -> vardecl PONTO_VIRGULA .
+
+    $end            reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    BREAK           reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    INT             reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    FLOAT           reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    STRING          reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    PRINT           reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    READ            reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    RETURN          reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    IF              reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    FOR             reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    IDENT           reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+    ELSE            reduce using rule 14 (statement -> vardecl PONTO_VIRGULA .)
+
+
+state 28
+
+    (15) statement -> atribstat PONTO_VIRGULA .
+
+    $end            reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    BREAK           reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    INT             reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    FLOAT           reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    STRING          reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    PRINT           reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    READ            reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    RETURN          reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    IF              reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    FOR             reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    IDENT           reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+    ELSE            reduce using rule 15 (statement -> atribstat PONTO_VIRGULA .)
+
+
+state 29
+
+    (16) statement -> printstat PONTO_VIRGULA .
+
+    $end            reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    BREAK           reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    INT             reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    FLOAT           reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    STRING          reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    PRINT           reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    READ            reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    RETURN          reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    IF              reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    FOR             reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    IDENT           reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+    ELSE            reduce using rule 16 (statement -> printstat PONTO_VIRGULA .)
+
+
+state 30
+
+    (17) statement -> readstat PONTO_VIRGULA .
+
+    $end            reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    BREAK           reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    INT             reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    FLOAT           reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    STRING          reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    PRINT           reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    READ            reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    RETURN          reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    IF              reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    FOR             reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    IDENT           reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+    ELSE            reduce using rule 17 (statement -> readstat PONTO_VIRGULA .)
+
+
+state 31
+
+    (18) statement -> returnstat PONTO_VIRGULA .
+
+    $end            reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    BREAK           reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    INT             reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    FLOAT           reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    STRING          reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    PRINT           reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    READ            reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    RETURN          reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    IF              reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    FOR             reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    IDENT           reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+    ELSE            reduce using rule 18 (statement -> returnstat PONTO_VIRGULA .)
+
+
+state 32
+
+    (21) statement -> LCHAVES statelist . RCHAVES
+
+    RCHAVES         shift and go to state 62
+
+
+state 33
+
+    (45) statelist -> statement . statelist2
+    (46) statelist2 -> . statelist
+    (47) statelist2 -> . epsilon
+    (45) statelist -> . statement statelist2
+    (84) epsilon -> .
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    RCHAVES         reduce using rule 84 (epsilon -> .)
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    statement                      shift and go to state 33
+    statelist2                     shift and go to state 63
+    statelist                      shift and go to state 64
+    epsilon                        shift and go to state 65
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 34
+
+    (22) statement -> BREAK PONTO_VIRGULA .
+
+    $end            reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    BREAK           reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    INT             reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    FLOAT           reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    STRING          reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    PRINT           reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    READ            reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    RETURN          reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    IF              reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    FOR             reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    IDENT           reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+    ELSE            reduce using rule 22 (statement -> BREAK PONTO_VIRGULA .)
+
+
+state 35
+
+    (4) funclist -> funcdef funclist2 .
+
+    $end            reduce using rule 4 (funclist -> funcdef funclist2 .)
+
+
+state 36
+
+    (5) funclist2 -> funclist .
+
+    $end            reduce using rule 5 (funclist2 -> funclist .)
+
+
+state 37
+
+    (6) funclist2 -> epsilon .
+
+    $end            reduce using rule 6 (funclist2 -> epsilon .)
+
+
+state 38
+
+    (24) vardecl -> INT IDENT . a
+    (27) a -> . LCOLCHETES INT_CONSTANT RCOLCHETES a
+    (28) a -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 67
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+
+    a                              shift and go to state 66
+    epsilon                        shift and go to state 68
+
+state 39
+
+    (81) lvalue -> IDENT c .
+
+    ATRIBUICAO      reduce using rule 81 (lvalue -> IDENT c .)
+    MULTIPLICACAO   reduce using rule 81 (lvalue -> IDENT c .)
+    DIVISAO         reduce using rule 81 (lvalue -> IDENT c .)
+    RESTO           reduce using rule 81 (lvalue -> IDENT c .)
+    SOMA            reduce using rule 81 (lvalue -> IDENT c .)
+    SUBTRACAO       reduce using rule 81 (lvalue -> IDENT c .)
+    MENOR           reduce using rule 81 (lvalue -> IDENT c .)
+    MAIOR           reduce using rule 81 (lvalue -> IDENT c .)
+    MENORIGUAL      reduce using rule 81 (lvalue -> IDENT c .)
+    MAIORIGUAL      reduce using rule 81 (lvalue -> IDENT c .)
+    IGUAL           reduce using rule 81 (lvalue -> IDENT c .)
+    DIFERENTE       reduce using rule 81 (lvalue -> IDENT c .)
+    PONTO_VIRGULA   reduce using rule 81 (lvalue -> IDENT c .)
+    RCOLCHETES      reduce using rule 81 (lvalue -> IDENT c .)
+    RPAREN          reduce using rule 81 (lvalue -> IDENT c .)
+
+
+state 40
+
+    (82) c -> LCOLCHETES . numexpression RCOLCHETES c
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 69
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 41
+
+    (83) c -> epsilon .
+
+    ATRIBUICAO      reduce using rule 83 (c -> epsilon .)
+    MULTIPLICACAO   reduce using rule 83 (c -> epsilon .)
+    DIVISAO         reduce using rule 83 (c -> epsilon .)
+    RESTO           reduce using rule 83 (c -> epsilon .)
+    SOMA            reduce using rule 83 (c -> epsilon .)
+    SUBTRACAO       reduce using rule 83 (c -> epsilon .)
+    MENOR           reduce using rule 83 (c -> epsilon .)
+    MAIOR           reduce using rule 83 (c -> epsilon .)
+    MENORIGUAL      reduce using rule 83 (c -> epsilon .)
+    MAIORIGUAL      reduce using rule 83 (c -> epsilon .)
+    IGUAL           reduce using rule 83 (c -> epsilon .)
+    DIFERENTE       reduce using rule 83 (c -> epsilon .)
+    PONTO_VIRGULA   reduce using rule 83 (c -> epsilon .)
+    RCOLCHETES      reduce using rule 83 (c -> epsilon .)
+    RPAREN          reduce using rule 83 (c -> epsilon .)
+
+
+state 42
+
+    (25) vardecl -> FLOAT IDENT . a
+    (27) a -> . LCOLCHETES INT_CONSTANT RCOLCHETES a
+    (28) a -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 67
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+
+    a                              shift and go to state 70
+    epsilon                        shift and go to state 68
+
+state 43
+
+    (26) vardecl -> STRING IDENT . a
+    (27) a -> . LCOLCHETES INT_CONSTANT RCOLCHETES a
+    (28) a -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 67
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+
+    a                              shift and go to state 71
+    epsilon                        shift and go to state 68
+
+state 44
+
+    (29) atribstat -> lvalue ATRIBUICAO . atribstat2
+    (30) atribstat2 -> . expression
+    (31) atribstat2 -> . allocexpression
+    (32) atribstat2 -> . funccall
+    (55) expression -> . numexpression expression2
+    (48) allocexpression -> . NEW allocexpression2
+    (33) funccall -> . CALL IDENT LPAREN paramlistcall RPAREN
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    NEW             shift and go to state 76
+    CALL            shift and go to state 77
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    lvalue                         shift and go to state 56
+    atribstat2                     shift and go to state 72
+    expression                     shift and go to state 73
+    allocexpression                shift and go to state 74
+    funccall                       shift and go to state 75
+    numexpression                  shift and go to state 46
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+
+state 45
+
+    (38) printstat -> PRINT expression .
+
+    PONTO_VIRGULA   reduce using rule 38 (printstat -> PRINT expression .)
+
+
+state 46
+
+    (55) expression -> numexpression . expression2
+    (56) expression2 -> . MENOR numexpression
+    (57) expression2 -> . MAIOR numexpression
+    (58) expression2 -> . MENORIGUAL numexpression
+    (59) expression2 -> . MAIORIGUAL numexpression
+    (60) expression2 -> . IGUAL numexpression
+    (61) expression2 -> . DIFERENTE numexpression
+    (62) expression2 -> . epsilon
+    (84) epsilon -> .
+
+    MENOR           shift and go to state 79
+    MAIOR           shift and go to state 80
+    MENORIGUAL      shift and go to state 81
+    MAIORIGUAL      shift and go to state 82
+    IGUAL           shift and go to state 83
+    DIFERENTE       shift and go to state 84
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    expression2                    shift and go to state 78
+    epsilon                        shift and go to state 85
+
+state 47
+
+    (63) numexpression -> term . d
+    (64) d -> . SOMA term d
+    (65) d -> . SUBTRACAO term d
+    (66) d -> . epsilon
+    (84) epsilon -> .
+
+    SOMA            shift and go to state 87
+    SUBTRACAO       shift and go to state 88
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    d                              shift and go to state 86
+    epsilon                        shift and go to state 89
+
+state 48
+
+    (67) term -> unaryexpr . b
+    (68) b -> . MULTIPLICACAO unaryexpr b
+    (69) b -> . DIVISAO unaryexpr b
+    (70) b -> . RESTO unaryexpr b
+    (71) b -> . epsilon
+    (84) epsilon -> .
+
+    MULTIPLICACAO   shift and go to state 91
+    DIVISAO         shift and go to state 92
+    RESTO           shift and go to state 93
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    b                              shift and go to state 90
+    epsilon                        shift and go to state 94
+
+state 49
+
+    (72) unaryexpr -> SOMA . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    factor                         shift and go to state 95
+    lvalue                         shift and go to state 56
+
+state 50
+
+    (74) unaryexpr -> factor .
+
+    MULTIPLICACAO   reduce using rule 74 (unaryexpr -> factor .)
+    DIVISAO         reduce using rule 74 (unaryexpr -> factor .)
+    RESTO           reduce using rule 74 (unaryexpr -> factor .)
+    SOMA            reduce using rule 74 (unaryexpr -> factor .)
+    SUBTRACAO       reduce using rule 74 (unaryexpr -> factor .)
+    MENOR           reduce using rule 74 (unaryexpr -> factor .)
+    MAIOR           reduce using rule 74 (unaryexpr -> factor .)
+    MENORIGUAL      reduce using rule 74 (unaryexpr -> factor .)
+    MAIORIGUAL      reduce using rule 74 (unaryexpr -> factor .)
+    IGUAL           reduce using rule 74 (unaryexpr -> factor .)
+    DIFERENTE       reduce using rule 74 (unaryexpr -> factor .)
+    PONTO_VIRGULA   reduce using rule 74 (unaryexpr -> factor .)
+    RCOLCHETES      reduce using rule 74 (unaryexpr -> factor .)
+    RPAREN          reduce using rule 74 (unaryexpr -> factor .)
+
+
+state 51
+
+    (73) unaryexpr -> SUBTRACAO . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    factor                         shift and go to state 96
+    lvalue                         shift and go to state 56
+
+state 52
+
+    (75) factor -> INT_CONSTANT .
+
+    MULTIPLICACAO   reduce using rule 75 (factor -> INT_CONSTANT .)
+    DIVISAO         reduce using rule 75 (factor -> INT_CONSTANT .)
+    RESTO           reduce using rule 75 (factor -> INT_CONSTANT .)
+    SOMA            reduce using rule 75 (factor -> INT_CONSTANT .)
+    SUBTRACAO       reduce using rule 75 (factor -> INT_CONSTANT .)
+    MENOR           reduce using rule 75 (factor -> INT_CONSTANT .)
+    MAIOR           reduce using rule 75 (factor -> INT_CONSTANT .)
+    MENORIGUAL      reduce using rule 75 (factor -> INT_CONSTANT .)
+    MAIORIGUAL      reduce using rule 75 (factor -> INT_CONSTANT .)
+    IGUAL           reduce using rule 75 (factor -> INT_CONSTANT .)
+    DIFERENTE       reduce using rule 75 (factor -> INT_CONSTANT .)
+    PONTO_VIRGULA   reduce using rule 75 (factor -> INT_CONSTANT .)
+    RCOLCHETES      reduce using rule 75 (factor -> INT_CONSTANT .)
+    RPAREN          reduce using rule 75 (factor -> INT_CONSTANT .)
+
+
+state 53
+
+    (76) factor -> FLOAT_CONSTANT .
+
+    MULTIPLICACAO   reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    DIVISAO         reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    RESTO           reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    SOMA            reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    SUBTRACAO       reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    MENOR           reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    MAIOR           reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    MENORIGUAL      reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    MAIORIGUAL      reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    IGUAL           reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    DIFERENTE       reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    PONTO_VIRGULA   reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    RCOLCHETES      reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+    RPAREN          reduce using rule 76 (factor -> FLOAT_CONSTANT .)
+
+
+state 54
+
+    (77) factor -> STRING_CONSTANT .
+
+    MULTIPLICACAO   reduce using rule 77 (factor -> STRING_CONSTANT .)
+    DIVISAO         reduce using rule 77 (factor -> STRING_CONSTANT .)
+    RESTO           reduce using rule 77 (factor -> STRING_CONSTANT .)
+    SOMA            reduce using rule 77 (factor -> STRING_CONSTANT .)
+    SUBTRACAO       reduce using rule 77 (factor -> STRING_CONSTANT .)
+    MENOR           reduce using rule 77 (factor -> STRING_CONSTANT .)
+    MAIOR           reduce using rule 77 (factor -> STRING_CONSTANT .)
+    MENORIGUAL      reduce using rule 77 (factor -> STRING_CONSTANT .)
+    MAIORIGUAL      reduce using rule 77 (factor -> STRING_CONSTANT .)
+    IGUAL           reduce using rule 77 (factor -> STRING_CONSTANT .)
+    DIFERENTE       reduce using rule 77 (factor -> STRING_CONSTANT .)
+    PONTO_VIRGULA   reduce using rule 77 (factor -> STRING_CONSTANT .)
+    RCOLCHETES      reduce using rule 77 (factor -> STRING_CONSTANT .)
+    RPAREN          reduce using rule 77 (factor -> STRING_CONSTANT .)
+
+
+state 55
+
+    (78) factor -> NULL .
+
+    MULTIPLICACAO   reduce using rule 78 (factor -> NULL .)
+    DIVISAO         reduce using rule 78 (factor -> NULL .)
+    RESTO           reduce using rule 78 (factor -> NULL .)
+    SOMA            reduce using rule 78 (factor -> NULL .)
+    SUBTRACAO       reduce using rule 78 (factor -> NULL .)
+    MENOR           reduce using rule 78 (factor -> NULL .)
+    MAIOR           reduce using rule 78 (factor -> NULL .)
+    MENORIGUAL      reduce using rule 78 (factor -> NULL .)
+    MAIORIGUAL      reduce using rule 78 (factor -> NULL .)
+    IGUAL           reduce using rule 78 (factor -> NULL .)
+    DIFERENTE       reduce using rule 78 (factor -> NULL .)
+    PONTO_VIRGULA   reduce using rule 78 (factor -> NULL .)
+    RCOLCHETES      reduce using rule 78 (factor -> NULL .)
+    RPAREN          reduce using rule 78 (factor -> NULL .)
+
+
+state 56
+
+    (79) factor -> lvalue .
+
+    MULTIPLICACAO   reduce using rule 79 (factor -> lvalue .)
+    DIVISAO         reduce using rule 79 (factor -> lvalue .)
+    RESTO           reduce using rule 79 (factor -> lvalue .)
+    SOMA            reduce using rule 79 (factor -> lvalue .)
+    SUBTRACAO       reduce using rule 79 (factor -> lvalue .)
+    MENOR           reduce using rule 79 (factor -> lvalue .)
+    MAIOR           reduce using rule 79 (factor -> lvalue .)
+    MENORIGUAL      reduce using rule 79 (factor -> lvalue .)
+    MAIORIGUAL      reduce using rule 79 (factor -> lvalue .)
+    IGUAL           reduce using rule 79 (factor -> lvalue .)
+    DIFERENTE       reduce using rule 79 (factor -> lvalue .)
+    PONTO_VIRGULA   reduce using rule 79 (factor -> lvalue .)
+    RCOLCHETES      reduce using rule 79 (factor -> lvalue .)
+    RPAREN          reduce using rule 79 (factor -> lvalue .)
+
+
+state 57
+
+    (80) factor -> LPAREN . numexpression RPAREN
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 97
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 58
+
+    (39) readstat -> READ lvalue .
+
+    PONTO_VIRGULA   reduce using rule 39 (readstat -> READ lvalue .)
+
+
+state 59
+
+    (41) ifstat -> IF LPAREN . expression RPAREN statement ifstat2
+    (55) expression -> . numexpression expression2
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    expression                     shift and go to state 98
+    numexpression                  shift and go to state 46
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 60
+
+    (44) forstat -> FOR LPAREN . atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (81) lvalue -> . IDENT c
+
+    IDENT           shift and go to state 17
+
+    atribstat                      shift and go to state 99
+    lvalue                         shift and go to state 20
+
+state 61
+
+    (7) funcdef -> DEF IDENT . LPAREN paramlist RPAREN LCHAVES statelist RCHAVES
+
+    LPAREN          shift and go to state 100
+
+
+state 62
+
+    (21) statement -> LCHAVES statelist RCHAVES .
+
+    $end            reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    LCHAVES         reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    BREAK           reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    PONTO_VIRGULA   reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    INT             reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    FLOAT           reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    STRING          reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    PRINT           reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    READ            reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    RETURN          reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    IF              reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    FOR             reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    IDENT           reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    RCHAVES         reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+    ELSE            reduce using rule 21 (statement -> LCHAVES statelist RCHAVES .)
+
+
+state 63
+
+    (45) statelist -> statement statelist2 .
+
+    RCHAVES         reduce using rule 45 (statelist -> statement statelist2 .)
+
+
+state 64
+
+    (46) statelist2 -> statelist .
+
+    RCHAVES         reduce using rule 46 (statelist2 -> statelist .)
+
+
+state 65
+
+    (47) statelist2 -> epsilon .
+
+    RCHAVES         reduce using rule 47 (statelist2 -> epsilon .)
+
+
+state 66
+
+    (24) vardecl -> INT IDENT a .
+
+    PONTO_VIRGULA   reduce using rule 24 (vardecl -> INT IDENT a .)
+
+
+state 67
+
+    (27) a -> LCOLCHETES . INT_CONSTANT RCOLCHETES a
+
+    INT_CONSTANT    shift and go to state 101
+
+
+state 68
+
+    (28) a -> epsilon .
+
+    PONTO_VIRGULA   reduce using rule 28 (a -> epsilon .)
+
+
+state 69
+
+    (82) c -> LCOLCHETES numexpression . RCOLCHETES c
+
+    RCOLCHETES      shift and go to state 102
+
+
+state 70
+
+    (25) vardecl -> FLOAT IDENT a .
+
+    PONTO_VIRGULA   reduce using rule 25 (vardecl -> FLOAT IDENT a .)
+
+
+state 71
+
+    (26) vardecl -> STRING IDENT a .
+
+    PONTO_VIRGULA   reduce using rule 26 (vardecl -> STRING IDENT a .)
+
+
+state 72
+
+    (29) atribstat -> lvalue ATRIBUICAO atribstat2 .
+
+    PONTO_VIRGULA   reduce using rule 29 (atribstat -> lvalue ATRIBUICAO atribstat2 .)
+    RPAREN          reduce using rule 29 (atribstat -> lvalue ATRIBUICAO atribstat2 .)
+
+
+state 73
+
+    (30) atribstat2 -> expression .
+
+    PONTO_VIRGULA   reduce using rule 30 (atribstat2 -> expression .)
+    RPAREN          reduce using rule 30 (atribstat2 -> expression .)
+
+
+state 74
+
+    (31) atribstat2 -> allocexpression .
+
+    PONTO_VIRGULA   reduce using rule 31 (atribstat2 -> allocexpression .)
+    RPAREN          reduce using rule 31 (atribstat2 -> allocexpression .)
+
+
+state 75
+
+    (32) atribstat2 -> funccall .
+
+    PONTO_VIRGULA   reduce using rule 32 (atribstat2 -> funccall .)
+    RPAREN          reduce using rule 32 (atribstat2 -> funccall .)
+
+
+state 76
+
+    (48) allocexpression -> NEW . allocexpression2
+    (49) allocexpression2 -> . INT e
+    (50) allocexpression2 -> . FLOAT e
+    (51) allocexpression2 -> . STRING e
+
+    INT             shift and go to state 104
+    FLOAT           shift and go to state 105
+    STRING          shift and go to state 106
+
+    allocexpression2               shift and go to state 103
+
+state 77
+
+    (33) funccall -> CALL . IDENT LPAREN paramlistcall RPAREN
+
+    IDENT           shift and go to state 107
+
+
+state 78
+
+    (55) expression -> numexpression expression2 .
+
+    PONTO_VIRGULA   reduce using rule 55 (expression -> numexpression expression2 .)
+    RPAREN          reduce using rule 55 (expression -> numexpression expression2 .)
+
+
+state 79
+
+    (56) expression2 -> MENOR . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 108
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 80
+
+    (57) expression2 -> MAIOR . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 109
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 81
+
+    (58) expression2 -> MENORIGUAL . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 110
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 82
+
+    (59) expression2 -> MAIORIGUAL . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 111
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 83
+
+    (60) expression2 -> IGUAL . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 112
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 84
+
+    (61) expression2 -> DIFERENTE . numexpression
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 113
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 85
+
+    (62) expression2 -> epsilon .
+
+    PONTO_VIRGULA   reduce using rule 62 (expression2 -> epsilon .)
+    RPAREN          reduce using rule 62 (expression2 -> epsilon .)
+
+
+state 86
+
+    (63) numexpression -> term d .
+
+    MENOR           reduce using rule 63 (numexpression -> term d .)
+    MAIOR           reduce using rule 63 (numexpression -> term d .)
+    MENORIGUAL      reduce using rule 63 (numexpression -> term d .)
+    MAIORIGUAL      reduce using rule 63 (numexpression -> term d .)
+    IGUAL           reduce using rule 63 (numexpression -> term d .)
+    DIFERENTE       reduce using rule 63 (numexpression -> term d .)
+    PONTO_VIRGULA   reduce using rule 63 (numexpression -> term d .)
+    RCOLCHETES      reduce using rule 63 (numexpression -> term d .)
+    RPAREN          reduce using rule 63 (numexpression -> term d .)
+
+
+state 87
+
+    (64) d -> SOMA . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    term                           shift and go to state 114
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 88
+
+    (65) d -> SUBTRACAO . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    term                           shift and go to state 115
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 89
+
+    (66) d -> epsilon .
+
+    MENOR           reduce using rule 66 (d -> epsilon .)
+    MAIOR           reduce using rule 66 (d -> epsilon .)
+    MENORIGUAL      reduce using rule 66 (d -> epsilon .)
+    MAIORIGUAL      reduce using rule 66 (d -> epsilon .)
+    IGUAL           reduce using rule 66 (d -> epsilon .)
+    DIFERENTE       reduce using rule 66 (d -> epsilon .)
+    PONTO_VIRGULA   reduce using rule 66 (d -> epsilon .)
+    RCOLCHETES      reduce using rule 66 (d -> epsilon .)
+    RPAREN          reduce using rule 66 (d -> epsilon .)
+
+
+state 90
+
+    (67) term -> unaryexpr b .
+
+    SOMA            reduce using rule 67 (term -> unaryexpr b .)
+    SUBTRACAO       reduce using rule 67 (term -> unaryexpr b .)
+    MENOR           reduce using rule 67 (term -> unaryexpr b .)
+    MAIOR           reduce using rule 67 (term -> unaryexpr b .)
+    MENORIGUAL      reduce using rule 67 (term -> unaryexpr b .)
+    MAIORIGUAL      reduce using rule 67 (term -> unaryexpr b .)
+    IGUAL           reduce using rule 67 (term -> unaryexpr b .)
+    DIFERENTE       reduce using rule 67 (term -> unaryexpr b .)
+    PONTO_VIRGULA   reduce using rule 67 (term -> unaryexpr b .)
+    RCOLCHETES      reduce using rule 67 (term -> unaryexpr b .)
+    RPAREN          reduce using rule 67 (term -> unaryexpr b .)
+
+
+state 91
+
+    (68) b -> MULTIPLICACAO . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    unaryexpr                      shift and go to state 116
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 92
+
+    (69) b -> DIVISAO . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    unaryexpr                      shift and go to state 117
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 93
+
+    (70) b -> RESTO . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    unaryexpr                      shift and go to state 118
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 94
+
+    (71) b -> epsilon .
+
+    SOMA            reduce using rule 71 (b -> epsilon .)
+    SUBTRACAO       reduce using rule 71 (b -> epsilon .)
+    MENOR           reduce using rule 71 (b -> epsilon .)
+    MAIOR           reduce using rule 71 (b -> epsilon .)
+    MENORIGUAL      reduce using rule 71 (b -> epsilon .)
+    MAIORIGUAL      reduce using rule 71 (b -> epsilon .)
+    IGUAL           reduce using rule 71 (b -> epsilon .)
+    DIFERENTE       reduce using rule 71 (b -> epsilon .)
+    PONTO_VIRGULA   reduce using rule 71 (b -> epsilon .)
+    RCOLCHETES      reduce using rule 71 (b -> epsilon .)
+    RPAREN          reduce using rule 71 (b -> epsilon .)
+
+
+state 95
+
+    (72) unaryexpr -> SOMA factor .
+
+    MULTIPLICACAO   reduce using rule 72 (unaryexpr -> SOMA factor .)
+    DIVISAO         reduce using rule 72 (unaryexpr -> SOMA factor .)
+    RESTO           reduce using rule 72 (unaryexpr -> SOMA factor .)
+    SOMA            reduce using rule 72 (unaryexpr -> SOMA factor .)
+    SUBTRACAO       reduce using rule 72 (unaryexpr -> SOMA factor .)
+    MENOR           reduce using rule 72 (unaryexpr -> SOMA factor .)
+    MAIOR           reduce using rule 72 (unaryexpr -> SOMA factor .)
+    MENORIGUAL      reduce using rule 72 (unaryexpr -> SOMA factor .)
+    MAIORIGUAL      reduce using rule 72 (unaryexpr -> SOMA factor .)
+    IGUAL           reduce using rule 72 (unaryexpr -> SOMA factor .)
+    DIFERENTE       reduce using rule 72 (unaryexpr -> SOMA factor .)
+    PONTO_VIRGULA   reduce using rule 72 (unaryexpr -> SOMA factor .)
+    RCOLCHETES      reduce using rule 72 (unaryexpr -> SOMA factor .)
+    RPAREN          reduce using rule 72 (unaryexpr -> SOMA factor .)
+
+
+state 96
+
+    (73) unaryexpr -> SUBTRACAO factor .
+
+    MULTIPLICACAO   reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    DIVISAO         reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    RESTO           reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    SOMA            reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    SUBTRACAO       reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    MENOR           reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    MAIOR           reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    MENORIGUAL      reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    MAIORIGUAL      reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    IGUAL           reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    DIFERENTE       reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    PONTO_VIRGULA   reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    RCOLCHETES      reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+    RPAREN          reduce using rule 73 (unaryexpr -> SUBTRACAO factor .)
+
+
+state 97
+
+    (80) factor -> LPAREN numexpression . RPAREN
+
+    RPAREN          shift and go to state 119
+
+
+state 98
+
+    (41) ifstat -> IF LPAREN expression . RPAREN statement ifstat2
+
+    RPAREN          shift and go to state 120
+
+
+state 99
+
+    (44) forstat -> FOR LPAREN atribstat . PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+
+    PONTO_VIRGULA   shift and go to state 121
+
+
+state 100
+
+    (7) funcdef -> DEF IDENT LPAREN . paramlist RPAREN LCHAVES statelist RCHAVES
+    (8) paramlist -> . INT IDENT paramlist2
+    (9) paramlist -> . FLOAT IDENT paramlist2
+    (10) paramlist -> . STRING IDENT paramlist2
+    (11) paramlist -> . epsilon
+    (84) epsilon -> .
+
+    INT             shift and go to state 123
+    FLOAT           shift and go to state 124
+    STRING          shift and go to state 125
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlist                      shift and go to state 122
+    epsilon                        shift and go to state 126
+
+state 101
+
+    (27) a -> LCOLCHETES INT_CONSTANT . RCOLCHETES a
+
+    RCOLCHETES      shift and go to state 127
+
+
+state 102
+
+    (82) c -> LCOLCHETES numexpression RCOLCHETES . c
+    (82) c -> . LCOLCHETES numexpression RCOLCHETES c
+    (83) c -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 40
+    ATRIBUICAO      reduce using rule 84 (epsilon -> .)
+    MULTIPLICACAO   reduce using rule 84 (epsilon -> .)
+    DIVISAO         reduce using rule 84 (epsilon -> .)
+    RESTO           reduce using rule 84 (epsilon -> .)
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    c                              shift and go to state 128
+    epsilon                        shift and go to state 41
+
+state 103
+
+    (48) allocexpression -> NEW allocexpression2 .
+
+    PONTO_VIRGULA   reduce using rule 48 (allocexpression -> NEW allocexpression2 .)
+    RPAREN          reduce using rule 48 (allocexpression -> NEW allocexpression2 .)
+
+
+state 104
+
+    (49) allocexpression2 -> INT . e
+    (52) e -> . LCOLCHETES numexpression RCOLCHETES e2
+
+    LCOLCHETES      shift and go to state 130
+
+    e                              shift and go to state 129
+
+state 105
+
+    (50) allocexpression2 -> FLOAT . e
+    (52) e -> . LCOLCHETES numexpression RCOLCHETES e2
+
+    LCOLCHETES      shift and go to state 130
+
+    e                              shift and go to state 131
+
+state 106
+
+    (51) allocexpression2 -> STRING . e
+    (52) e -> . LCOLCHETES numexpression RCOLCHETES e2
+
+    LCOLCHETES      shift and go to state 130
+
+    e                              shift and go to state 132
+
+state 107
+
+    (33) funccall -> CALL IDENT . LPAREN paramlistcall RPAREN
+
+    LPAREN          shift and go to state 133
+
+
+state 108
+
+    (56) expression2 -> MENOR numexpression .
+
+    PONTO_VIRGULA   reduce using rule 56 (expression2 -> MENOR numexpression .)
+    RPAREN          reduce using rule 56 (expression2 -> MENOR numexpression .)
+
+
+state 109
+
+    (57) expression2 -> MAIOR numexpression .
+
+    PONTO_VIRGULA   reduce using rule 57 (expression2 -> MAIOR numexpression .)
+    RPAREN          reduce using rule 57 (expression2 -> MAIOR numexpression .)
+
+
+state 110
+
+    (58) expression2 -> MENORIGUAL numexpression .
+
+    PONTO_VIRGULA   reduce using rule 58 (expression2 -> MENORIGUAL numexpression .)
+    RPAREN          reduce using rule 58 (expression2 -> MENORIGUAL numexpression .)
+
+
+state 111
+
+    (59) expression2 -> MAIORIGUAL numexpression .
+
+    PONTO_VIRGULA   reduce using rule 59 (expression2 -> MAIORIGUAL numexpression .)
+    RPAREN          reduce using rule 59 (expression2 -> MAIORIGUAL numexpression .)
+
+
+state 112
+
+    (60) expression2 -> IGUAL numexpression .
+
+    PONTO_VIRGULA   reduce using rule 60 (expression2 -> IGUAL numexpression .)
+    RPAREN          reduce using rule 60 (expression2 -> IGUAL numexpression .)
+
+
+state 113
+
+    (61) expression2 -> DIFERENTE numexpression .
+
+    PONTO_VIRGULA   reduce using rule 61 (expression2 -> DIFERENTE numexpression .)
+    RPAREN          reduce using rule 61 (expression2 -> DIFERENTE numexpression .)
+
+
+state 114
+
+    (64) d -> SOMA term . d
+    (64) d -> . SOMA term d
+    (65) d -> . SUBTRACAO term d
+    (66) d -> . epsilon
+    (84) epsilon -> .
+
+    SOMA            shift and go to state 87
+    SUBTRACAO       shift and go to state 88
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    d                              shift and go to state 134
+    epsilon                        shift and go to state 89
+
+state 115
+
+    (65) d -> SUBTRACAO term . d
+    (64) d -> . SOMA term d
+    (65) d -> . SUBTRACAO term d
+    (66) d -> . epsilon
+    (84) epsilon -> .
+
+    SOMA            shift and go to state 87
+    SUBTRACAO       shift and go to state 88
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    d                              shift and go to state 135
+    epsilon                        shift and go to state 89
+
+state 116
+
+    (68) b -> MULTIPLICACAO unaryexpr . b
+    (68) b -> . MULTIPLICACAO unaryexpr b
+    (69) b -> . DIVISAO unaryexpr b
+    (70) b -> . RESTO unaryexpr b
+    (71) b -> . epsilon
+    (84) epsilon -> .
+
+    MULTIPLICACAO   shift and go to state 91
+    DIVISAO         shift and go to state 92
+    RESTO           shift and go to state 93
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    b                              shift and go to state 136
+    epsilon                        shift and go to state 94
+
+state 117
+
+    (69) b -> DIVISAO unaryexpr . b
+    (68) b -> . MULTIPLICACAO unaryexpr b
+    (69) b -> . DIVISAO unaryexpr b
+    (70) b -> . RESTO unaryexpr b
+    (71) b -> . epsilon
+    (84) epsilon -> .
+
+    MULTIPLICACAO   shift and go to state 91
+    DIVISAO         shift and go to state 92
+    RESTO           shift and go to state 93
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    b                              shift and go to state 137
+    epsilon                        shift and go to state 94
+
+state 118
+
+    (70) b -> RESTO unaryexpr . b
+    (68) b -> . MULTIPLICACAO unaryexpr b
+    (69) b -> . DIVISAO unaryexpr b
+    (70) b -> . RESTO unaryexpr b
+    (71) b -> . epsilon
+    (84) epsilon -> .
+
+    MULTIPLICACAO   shift and go to state 91
+    DIVISAO         shift and go to state 92
+    RESTO           shift and go to state 93
+    SOMA            reduce using rule 84 (epsilon -> .)
+    SUBTRACAO       reduce using rule 84 (epsilon -> .)
+    MENOR           reduce using rule 84 (epsilon -> .)
+    MAIOR           reduce using rule 84 (epsilon -> .)
+    MENORIGUAL      reduce using rule 84 (epsilon -> .)
+    MAIORIGUAL      reduce using rule 84 (epsilon -> .)
+    IGUAL           reduce using rule 84 (epsilon -> .)
+    DIFERENTE       reduce using rule 84 (epsilon -> .)
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RCOLCHETES      reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    b                              shift and go to state 138
+    epsilon                        shift and go to state 94
+
+state 119
+
+    (80) factor -> LPAREN numexpression RPAREN .
+
+    MULTIPLICACAO   reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    DIVISAO         reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    RESTO           reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    SOMA            reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    SUBTRACAO       reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    MENOR           reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    MAIOR           reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    MENORIGUAL      reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    MAIORIGUAL      reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    IGUAL           reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    DIFERENTE       reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    PONTO_VIRGULA   reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    RCOLCHETES      reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+    RPAREN          reduce using rule 80 (factor -> LPAREN numexpression RPAREN .)
+
+
+state 120
+
+    (41) ifstat -> IF LPAREN expression RPAREN . statement ifstat2
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    statement                      shift and go to state 139
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 121
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA . expression PONTO_VIRGULA atribstat RPAREN statement
+    (55) expression -> . numexpression expression2
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    expression                     shift and go to state 140
+    numexpression                  shift and go to state 46
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 122
+
+    (7) funcdef -> DEF IDENT LPAREN paramlist . RPAREN LCHAVES statelist RCHAVES
+
+    RPAREN          shift and go to state 141
+
+
+state 123
+
+    (8) paramlist -> INT . IDENT paramlist2
+
+    IDENT           shift and go to state 142
+
+
+state 124
+
+    (9) paramlist -> FLOAT . IDENT paramlist2
+
+    IDENT           shift and go to state 143
+
+
+state 125
+
+    (10) paramlist -> STRING . IDENT paramlist2
+
+    IDENT           shift and go to state 144
+
+
+state 126
+
+    (11) paramlist -> epsilon .
+
+    RPAREN          reduce using rule 11 (paramlist -> epsilon .)
+
+
+state 127
+
+    (27) a -> LCOLCHETES INT_CONSTANT RCOLCHETES . a
+    (27) a -> . LCOLCHETES INT_CONSTANT RCOLCHETES a
+    (28) a -> . epsilon
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 67
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+
+    a                              shift and go to state 145
+    epsilon                        shift and go to state 68
+
+state 128
+
+    (82) c -> LCOLCHETES numexpression RCOLCHETES c .
+
+    ATRIBUICAO      reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    MULTIPLICACAO   reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    DIVISAO         reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    RESTO           reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    SOMA            reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    SUBTRACAO       reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    MENOR           reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    MAIOR           reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    MENORIGUAL      reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    MAIORIGUAL      reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    IGUAL           reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    DIFERENTE       reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    PONTO_VIRGULA   reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    RCOLCHETES      reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+    RPAREN          reduce using rule 82 (c -> LCOLCHETES numexpression RCOLCHETES c .)
+
+
+state 129
+
+    (49) allocexpression2 -> INT e .
+
+    PONTO_VIRGULA   reduce using rule 49 (allocexpression2 -> INT e .)
+    RPAREN          reduce using rule 49 (allocexpression2 -> INT e .)
+
+
+state 130
+
+    (52) e -> LCOLCHETES . numexpression RCOLCHETES e2
+    (63) numexpression -> . term d
+    (67) term -> . unaryexpr b
+    (72) unaryexpr -> . SOMA factor
+    (73) unaryexpr -> . SUBTRACAO factor
+    (74) unaryexpr -> . factor
+    (75) factor -> . INT_CONSTANT
+    (76) factor -> . FLOAT_CONSTANT
+    (77) factor -> . STRING_CONSTANT
+    (78) factor -> . NULL
+    (79) factor -> . lvalue
+    (80) factor -> . LPAREN numexpression RPAREN
+    (81) lvalue -> . IDENT c
+
+    SOMA            shift and go to state 49
+    SUBTRACAO       shift and go to state 51
+    INT_CONSTANT    shift and go to state 52
+    FLOAT_CONSTANT  shift and go to state 53
+    STRING_CONSTANT shift and go to state 54
+    NULL            shift and go to state 55
+    LPAREN          shift and go to state 57
+    IDENT           shift and go to state 17
+
+    numexpression                  shift and go to state 146
+    term                           shift and go to state 47
+    unaryexpr                      shift and go to state 48
+    factor                         shift and go to state 50
+    lvalue                         shift and go to state 56
+
+state 131
+
+    (50) allocexpression2 -> FLOAT e .
+
+    PONTO_VIRGULA   reduce using rule 50 (allocexpression2 -> FLOAT e .)
+    RPAREN          reduce using rule 50 (allocexpression2 -> FLOAT e .)
+
+
+state 132
+
+    (51) allocexpression2 -> STRING e .
+
+    PONTO_VIRGULA   reduce using rule 51 (allocexpression2 -> STRING e .)
+    RPAREN          reduce using rule 51 (allocexpression2 -> STRING e .)
+
+
+state 133
+
+    (33) funccall -> CALL IDENT LPAREN . paramlistcall RPAREN
+    (34) paramlistcall -> . IDENT paramlistcall2
+    (35) paramlistcall -> . epsilon
+    (84) epsilon -> .
+
+    IDENT           shift and go to state 147
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlistcall                  shift and go to state 148
+    epsilon                        shift and go to state 149
+
+state 134
+
+    (64) d -> SOMA term d .
+
+    MENOR           reduce using rule 64 (d -> SOMA term d .)
+    MAIOR           reduce using rule 64 (d -> SOMA term d .)
+    MENORIGUAL      reduce using rule 64 (d -> SOMA term d .)
+    MAIORIGUAL      reduce using rule 64 (d -> SOMA term d .)
+    IGUAL           reduce using rule 64 (d -> SOMA term d .)
+    DIFERENTE       reduce using rule 64 (d -> SOMA term d .)
+    PONTO_VIRGULA   reduce using rule 64 (d -> SOMA term d .)
+    RCOLCHETES      reduce using rule 64 (d -> SOMA term d .)
+    RPAREN          reduce using rule 64 (d -> SOMA term d .)
+
+
+state 135
+
+    (65) d -> SUBTRACAO term d .
+
+    MENOR           reduce using rule 65 (d -> SUBTRACAO term d .)
+    MAIOR           reduce using rule 65 (d -> SUBTRACAO term d .)
+    MENORIGUAL      reduce using rule 65 (d -> SUBTRACAO term d .)
+    MAIORIGUAL      reduce using rule 65 (d -> SUBTRACAO term d .)
+    IGUAL           reduce using rule 65 (d -> SUBTRACAO term d .)
+    DIFERENTE       reduce using rule 65 (d -> SUBTRACAO term d .)
+    PONTO_VIRGULA   reduce using rule 65 (d -> SUBTRACAO term d .)
+    RCOLCHETES      reduce using rule 65 (d -> SUBTRACAO term d .)
+    RPAREN          reduce using rule 65 (d -> SUBTRACAO term d .)
+
+
+state 136
+
+    (68) b -> MULTIPLICACAO unaryexpr b .
+
+    SOMA            reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    SUBTRACAO       reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    MENOR           reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    MAIOR           reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    MENORIGUAL      reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    MAIORIGUAL      reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    IGUAL           reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    DIFERENTE       reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    PONTO_VIRGULA   reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    RCOLCHETES      reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+    RPAREN          reduce using rule 68 (b -> MULTIPLICACAO unaryexpr b .)
+
+
+state 137
+
+    (69) b -> DIVISAO unaryexpr b .
+
+    SOMA            reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    SUBTRACAO       reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    MENOR           reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    MAIOR           reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    MENORIGUAL      reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    MAIORIGUAL      reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    IGUAL           reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    DIFERENTE       reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    PONTO_VIRGULA   reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    RCOLCHETES      reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+    RPAREN          reduce using rule 69 (b -> DIVISAO unaryexpr b .)
+
+
+state 138
+
+    (70) b -> RESTO unaryexpr b .
+
+    SOMA            reduce using rule 70 (b -> RESTO unaryexpr b .)
+    SUBTRACAO       reduce using rule 70 (b -> RESTO unaryexpr b .)
+    MENOR           reduce using rule 70 (b -> RESTO unaryexpr b .)
+    MAIOR           reduce using rule 70 (b -> RESTO unaryexpr b .)
+    MENORIGUAL      reduce using rule 70 (b -> RESTO unaryexpr b .)
+    MAIORIGUAL      reduce using rule 70 (b -> RESTO unaryexpr b .)
+    IGUAL           reduce using rule 70 (b -> RESTO unaryexpr b .)
+    DIFERENTE       reduce using rule 70 (b -> RESTO unaryexpr b .)
+    PONTO_VIRGULA   reduce using rule 70 (b -> RESTO unaryexpr b .)
+    RCOLCHETES      reduce using rule 70 (b -> RESTO unaryexpr b .)
+    RPAREN          reduce using rule 70 (b -> RESTO unaryexpr b .)
+
+
+state 139
+
+    (41) ifstat -> IF LPAREN expression RPAREN statement . ifstat2
+    (42) ifstat2 -> . ELSE statement PONTO_VIRGULA
+    (43) ifstat2 -> . PONTO_VIRGULA
+
+    ELSE            shift and go to state 151
+    PONTO_VIRGULA   shift and go to state 152
+
+    ifstat2                        shift and go to state 150
+
+state 140
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression . PONTO_VIRGULA atribstat RPAREN statement
+
+    PONTO_VIRGULA   shift and go to state 153
+
+
+state 141
+
+    (7) funcdef -> DEF IDENT LPAREN paramlist RPAREN . LCHAVES statelist RCHAVES
+
+    LCHAVES         shift and go to state 154
+
+
+state 142
+
+    (8) paramlist -> INT IDENT . paramlist2
+    (12) paramlist2 -> . VIRGULA paramlist
+    (13) paramlist2 -> . epsilon
+    (84) epsilon -> .
+
+    VIRGULA         shift and go to state 156
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlist2                     shift and go to state 155
+    epsilon                        shift and go to state 157
+
+state 143
+
+    (9) paramlist -> FLOAT IDENT . paramlist2
+    (12) paramlist2 -> . VIRGULA paramlist
+    (13) paramlist2 -> . epsilon
+    (84) epsilon -> .
+
+    VIRGULA         shift and go to state 156
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlist2                     shift and go to state 158
+    epsilon                        shift and go to state 157
+
+state 144
+
+    (10) paramlist -> STRING IDENT . paramlist2
+    (12) paramlist2 -> . VIRGULA paramlist
+    (13) paramlist2 -> . epsilon
+    (84) epsilon -> .
+
+    VIRGULA         shift and go to state 156
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlist2                     shift and go to state 159
+    epsilon                        shift and go to state 157
+
+state 145
+
+    (27) a -> LCOLCHETES INT_CONSTANT RCOLCHETES a .
+
+    PONTO_VIRGULA   reduce using rule 27 (a -> LCOLCHETES INT_CONSTANT RCOLCHETES a .)
+
+
+state 146
+
+    (52) e -> LCOLCHETES numexpression . RCOLCHETES e2
+
+    RCOLCHETES      shift and go to state 160
+
+
+state 147
+
+    (34) paramlistcall -> IDENT . paramlistcall2
+    (36) paramlistcall2 -> . VIRGULA paramlistcall
+    (37) paramlistcall2 -> . epsilon
+    (84) epsilon -> .
+
+    VIRGULA         shift and go to state 162
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlistcall2                 shift and go to state 161
+    epsilon                        shift and go to state 163
+
+state 148
+
+    (33) funccall -> CALL IDENT LPAREN paramlistcall . RPAREN
+
+    RPAREN          shift and go to state 164
+
+
+state 149
+
+    (35) paramlistcall -> epsilon .
+
+    RPAREN          reduce using rule 35 (paramlistcall -> epsilon .)
+
+
+state 150
+
+    (41) ifstat -> IF LPAREN expression RPAREN statement ifstat2 .
+
+    $end            reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    LCHAVES         reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    BREAK           reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    PONTO_VIRGULA   reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    INT             reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    FLOAT           reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    STRING          reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    PRINT           reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    READ            reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    RETURN          reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    IF              reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    FOR             reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    IDENT           reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    RCHAVES         reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+    ELSE            reduce using rule 41 (ifstat -> IF LPAREN expression RPAREN statement ifstat2 .)
+
+
+state 151
+
+    (42) ifstat2 -> ELSE . statement PONTO_VIRGULA
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    statement                      shift and go to state 165
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 152
+
+    (43) ifstat2 -> PONTO_VIRGULA .
+
+    $end            reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    BREAK           reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    INT             reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    FLOAT           reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    STRING          reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    PRINT           reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    READ            reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    RETURN          reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    IF              reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    FOR             reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    IDENT           reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+    ELSE            reduce using rule 43 (ifstat2 -> PONTO_VIRGULA .)
+
+
+state 153
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA . atribstat RPAREN statement
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (81) lvalue -> . IDENT c
+
+    IDENT           shift and go to state 17
+
+    atribstat                      shift and go to state 166
+    lvalue                         shift and go to state 20
+
+state 154
+
+    (7) funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES . statelist RCHAVES
+    (45) statelist -> . statement statelist2
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    statelist                      shift and go to state 167
+    statement                      shift and go to state 33
+    vardecl                        shift and go to state 5
+    atribstat                      shift and go to state 7
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 155
+
+    (8) paramlist -> INT IDENT paramlist2 .
+
+    RPAREN          reduce using rule 8 (paramlist -> INT IDENT paramlist2 .)
+
+
+state 156
+
+    (12) paramlist2 -> VIRGULA . paramlist
+    (8) paramlist -> . INT IDENT paramlist2
+    (9) paramlist -> . FLOAT IDENT paramlist2
+    (10) paramlist -> . STRING IDENT paramlist2
+    (11) paramlist -> . epsilon
+    (84) epsilon -> .
+
+    INT             shift and go to state 123
+    FLOAT           shift and go to state 124
+    STRING          shift and go to state 125
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlist                      shift and go to state 168
+    epsilon                        shift and go to state 126
+
+state 157
+
+    (13) paramlist2 -> epsilon .
+
+    RPAREN          reduce using rule 13 (paramlist2 -> epsilon .)
+
+
+state 158
+
+    (9) paramlist -> FLOAT IDENT paramlist2 .
+
+    RPAREN          reduce using rule 9 (paramlist -> FLOAT IDENT paramlist2 .)
+
+
+state 159
+
+    (10) paramlist -> STRING IDENT paramlist2 .
+
+    RPAREN          reduce using rule 10 (paramlist -> STRING IDENT paramlist2 .)
+
+
+state 160
+
+    (52) e -> LCOLCHETES numexpression RCOLCHETES . e2
+    (53) e2 -> . e
+    (54) e2 -> . epsilon
+    (52) e -> . LCOLCHETES numexpression RCOLCHETES e2
+    (84) epsilon -> .
+
+    LCOLCHETES      shift and go to state 130
+    PONTO_VIRGULA   reduce using rule 84 (epsilon -> .)
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    e2                             shift and go to state 169
+    e                              shift and go to state 170
+    epsilon                        shift and go to state 171
+
+state 161
+
+    (34) paramlistcall -> IDENT paramlistcall2 .
+
+    RPAREN          reduce using rule 34 (paramlistcall -> IDENT paramlistcall2 .)
+
+
+state 162
+
+    (36) paramlistcall2 -> VIRGULA . paramlistcall
+    (34) paramlistcall -> . IDENT paramlistcall2
+    (35) paramlistcall -> . epsilon
+    (84) epsilon -> .
+
+    IDENT           shift and go to state 147
+    RPAREN          reduce using rule 84 (epsilon -> .)
+
+    paramlistcall                  shift and go to state 172
+    epsilon                        shift and go to state 149
+
+state 163
+
+    (37) paramlistcall2 -> epsilon .
+
+    RPAREN          reduce using rule 37 (paramlistcall2 -> epsilon .)
+
+
+state 164
+
+    (33) funccall -> CALL IDENT LPAREN paramlistcall RPAREN .
+
+    PONTO_VIRGULA   reduce using rule 33 (funccall -> CALL IDENT LPAREN paramlistcall RPAREN .)
+    RPAREN          reduce using rule 33 (funccall -> CALL IDENT LPAREN paramlistcall RPAREN .)
+
+
+state 165
+
+    (42) ifstat2 -> ELSE statement . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 173
+
+
+state 166
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat . RPAREN statement
+
+    RPAREN          shift and go to state 174
+
+
+state 167
+
+    (7) funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist . RCHAVES
+
+    RCHAVES         shift and go to state 175
+
+
+state 168
+
+    (12) paramlist2 -> VIRGULA paramlist .
+
+    RPAREN          reduce using rule 12 (paramlist2 -> VIRGULA paramlist .)
+
+
+state 169
+
+    (52) e -> LCOLCHETES numexpression RCOLCHETES e2 .
+
+    PONTO_VIRGULA   reduce using rule 52 (e -> LCOLCHETES numexpression RCOLCHETES e2 .)
+    RPAREN          reduce using rule 52 (e -> LCOLCHETES numexpression RCOLCHETES e2 .)
+
+
+state 170
+
+    (53) e2 -> e .
+
+    PONTO_VIRGULA   reduce using rule 53 (e2 -> e .)
+    RPAREN          reduce using rule 53 (e2 -> e .)
+
+
+state 171
+
+    (54) e2 -> epsilon .
+
+    PONTO_VIRGULA   reduce using rule 54 (e2 -> epsilon .)
+    RPAREN          reduce using rule 54 (e2 -> epsilon .)
+
+
+state 172
+
+    (36) paramlistcall2 -> VIRGULA paramlistcall .
+
+    RPAREN          reduce using rule 36 (paramlistcall2 -> VIRGULA paramlistcall .)
+
+
+state 173
+
+    (42) ifstat2 -> ELSE statement PONTO_VIRGULA .
+
+    $end            reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    LCHAVES         reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    BREAK           reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    PONTO_VIRGULA   reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    INT             reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    FLOAT           reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    STRING          reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    PRINT           reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    READ            reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    RETURN          reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    IF              reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    FOR             reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    IDENT           reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    RCHAVES         reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+    ELSE            reduce using rule 42 (ifstat2 -> ELSE statement PONTO_VIRGULA .)
+
+
+state 174
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN . statement
+    (14) statement -> . vardecl PONTO_VIRGULA
+    (15) statement -> . atribstat PONTO_VIRGULA
+    (16) statement -> . printstat PONTO_VIRGULA
+    (17) statement -> . readstat PONTO_VIRGULA
+    (18) statement -> . returnstat PONTO_VIRGULA
+    (19) statement -> . ifstat
+    (20) statement -> . forstat
+    (21) statement -> . LCHAVES statelist RCHAVES
+    (22) statement -> . BREAK PONTO_VIRGULA
+    (23) statement -> . PONTO_VIRGULA
+    (24) vardecl -> . INT IDENT a
+    (25) vardecl -> . FLOAT IDENT a
+    (26) vardecl -> . STRING IDENT a
+    (29) atribstat -> . lvalue ATRIBUICAO atribstat2
+    (38) printstat -> . PRINT expression
+    (39) readstat -> . READ lvalue
+    (40) returnstat -> . RETURN
+    (41) ifstat -> . IF LPAREN expression RPAREN statement ifstat2
+    (44) forstat -> . FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement
+    (81) lvalue -> . IDENT c
+
+    LCHAVES         shift and go to state 13
+    BREAK           shift and go to state 14
+    PONTO_VIRGULA   shift and go to state 6
+    INT             shift and go to state 16
+    FLOAT           shift and go to state 18
+    STRING          shift and go to state 19
+    PRINT           shift and go to state 21
+    READ            shift and go to state 22
+    RETURN          shift and go to state 23
+    IF              shift and go to state 24
+    FOR             shift and go to state 25
+    IDENT           shift and go to state 17
+
+    atribstat                      shift and go to state 7
+    statement                      shift and go to state 176
+    vardecl                        shift and go to state 5
+    printstat                      shift and go to state 8
+    readstat                       shift and go to state 9
+    returnstat                     shift and go to state 10
+    ifstat                         shift and go to state 11
+    forstat                        shift and go to state 12
+    lvalue                         shift and go to state 20
+
+state 175
+
+    (7) funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES .
+
+    DEF             reduce using rule 7 (funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES .)
+    $end            reduce using rule 7 (funcdef -> DEF IDENT LPAREN paramlist RPAREN LCHAVES statelist RCHAVES .)
+
+
+state 176
+
+    (44) forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .
+
+    $end            reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    LCHAVES         reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    BREAK           reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    PONTO_VIRGULA   reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    INT             reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    FLOAT           reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    STRING          reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    PRINT           reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    READ            reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    RETURN          reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    IF              reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    FOR             reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    IDENT           reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    RCHAVES         reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+    ELSE            reduce using rule 44 (forstat -> FOR LPAREN atribstat PONTO_VIRGULA expression PONTO_VIRGULA atribstat RPAREN statement .)
+
