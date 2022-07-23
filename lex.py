@@ -1,5 +1,4 @@
 from ply.lex import lex
-import re
 
 reserved = {
     'def'       :   'DEF',
@@ -18,33 +17,11 @@ reserved = {
     'null'      :   'NULL',
 }
 
-tokens = [
-        'IDENT',
-        'FLOAT_CONSTANT',
-        'INT_CONSTANT',
-        'STRING_CONSTANT',
-        'LPAREN',
-        'RPAREN',
-        'LCHAVES',
-        'RCHAVES',
-        'VIRGULA',
-        'PONTO_VIRGULA',
-        'LCOLCHETES',
-        'RCOLCHETES',
-        'ATRIBUICAO',
-        'MENOR',
-        'MENORIGUAL',
-        'IGUAL',
-        'DIFERENTE',
-        'MAIOR',
-        'MAIORIGUAL',
-        'SOMA',
-        'SUBTRACAO',
-        'MULTIPLICACAO',
-        'DIVISAO',
-        'RESTO',
-        ] + list(reserved.values())
-
+tokens = ('LPAREN', 'RPAREN', 'LCHAVES', 'RCHAVES', 'VIRGULA', 'PONTO_VIRGULA', 'LCOLCHETES', 'RCOLCHETES',
+          'ATRIBUICAO', 'MENOR', 'MENORIGUAL', 'IGUAL', 'DIFERENTE', 'MAIOR', 'MAIORIGUAL', 'SOMA', 'SUBTRACAO',
+          'MULTIPLICACAO', 'DIVISAO', 'RESTO', 'IDENT', 'INT_CONSTANT', 'FLOAT_CONSTANT', 'STRING_CONSTANT', 'DEF',
+          'INT', 'FLOAT', 'STRING', 'BREAK', 'PRINT', 'READ', 'RETURN', 'IF', 'ELSE', 'FOR', 'NEW', 'NULL', 'CALL')
+        #   + list(reserved.values())
 
 t_ignore            = ' \t'
 t_DEF               = r'def'
@@ -85,27 +62,38 @@ t_RESTO             = r'%'
 
 def t_IDENT(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
+    # if t.value in reserved:# Verifica se está nas palavras reservadas.
+    #     t.type = reserved[t.value]
     t.type = reserved.get(t.value, 'IDENT')
     return t
+
 
 def t_FLOAT_CONSTANT(t):
     r'\d+[.]\d*|\d*[.]\d+'    # digito+.digito* | digito*.digito+
     t.value = float(t.value)
     return t
 
+
 def t_INT_CONSTANT(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
+
 def t_STRING_CONSTANT(t):
+    #r'\"([^\\\n]|(\\.))*?\"'    # "letra*"
     r'\"\w\"'
     return t
+
 
 # Definição de uma regra para encontrar o número da linha.
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
+# A string containing ignored characters (spaces and tabs)
+# Vide t_ignore
+
 
 # Error handling rule
 def t_error(t):
@@ -113,41 +101,21 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-
 # Build the lexer object
 lexer = lex()
 
+# data = 'def funcao ( int A , int B , float C , string Z ) { break ; }'
+# data = input('Digite seu token: ')
+
+# lexer.input(data)
+
+# for tok in lexer:
+#     print(tok)
+
+
 def analyse_lex(data):
-    lexer.input(data)
-    tabela_simbolo = []
-    tabela_check = []
-    cont = 1
-    print('\nANÁLISE LÉXICA:\n')
-    print(f'lexer: {lexer}')
-    for tok in lexer:
-        print(tok)
-        # print(f'tok: {tok}')
-        # print(f'tok.type: {tok.type}')          # default: name following the t_prefix
-        # print(f'tok.value: {tok.value}')        # é o lexema
-        # print(f'tok.lineno: {tok.lineno}')      # número da linha atual
-        # print(f'tok.lexpos: {tok.lexpos}')      # localização do token (o index é relativo ao início do input texto
-        # print(f'-----')
-        if tok.type == 'IDENT':
-            tup = [tok.value, cont, [], []]
-            if tup[0] not in tabela_check:
-                cont += 1
-                tabela_check.append(tup[0])
-                tup[2].append(tok.lineno)
-                tup[3].append(tok.lexpos)
-                tabela_simbolo.append(tup)
-            else:
-                for tup in tabela_simbolo:
-                    if tok.value in tup:
-                        tup[2].append(tok.lineno)
-                        tup[3].append(tok.lexpos)
-    print('\n')
-    print('TABELA DE SÍMBOLOS:')
-    print(f'Ex.: \n["IDENT", "Ordem de identificadores", [posição linha], [posição relativa à origem]]\n')
-    for tup in tabela_simbolo:
-        print(tup)
-    print('\n')
+  lexer.input(data)
+  print('\nANÁLISE LÉXICA:\n')
+  for tok in lexer:
+    print(tok)
+  # print('\n')
