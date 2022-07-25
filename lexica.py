@@ -107,9 +107,19 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def read_data():
+    with open("dados_entrada.lcc", mode="r", encoding="utf-8") as file:
+        dados = file.read()
+        return dados
+
 # Error handling rule
 def t_error(t):
-    print(f'Illegal character {t.value[0]!r}')
+    lexer = lex()
+    data = read_data()
+    lexer.input(data)
+    print('Erro Léxico')
+    print(f'Caractere ilegal: {t.value[0]!r}')
+    print(f'Esse erro acontece: \nna linha -> {t.lineno}\nna posição -> {t.lexpos} (relativa à origem).')
     t.lexer.skip(1)
 
 
