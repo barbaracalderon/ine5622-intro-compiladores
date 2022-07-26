@@ -7,7 +7,8 @@ from lexica import *
 
 # Leitura do arquivo de dados
 def read_data():
-    with open("dados_entrada.lcc", mode="r", encoding="utf-8") as file:
+    nome_arquivo = input(str('Digite o nome do arquivo de entrada, com a extensão: '))
+    with open(nome_arquivo, mode="r", encoding="utf-8") as file:
         dados = file.read()
         return dados
 
