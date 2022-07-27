@@ -117,15 +117,17 @@ def t_error(t):
     lexer = lex()
     data = read_data()
     lexer.input(data)
+    print()
     print('Erro Léxico')
     print(f'Caractere ilegal: {t.value[0]!r}')
-    print(f'Esse erro acontece: \nna linha -> {t.lineno}\nna posição -> {t.lexpos} (relativa à origem).')
+    print(f'Esse erro acontece na linha {t.lineno} e na posição {t.lexpos} (relativa à origem).')
     t.lexer.skip(1)
-
+    print()
 
 
 # Build the lexer object
 lexer = lex()
+
 
 def analyse_lex(data):
     lexer.input(data)
