@@ -13,7 +13,7 @@ def principal ( )
     int R ;
     C = 4 ;
     D = 5 ;
-    R = func1 ( C , D ) ;
+    R = call func1 ( C , D ) ;
     return ;
 }
 
