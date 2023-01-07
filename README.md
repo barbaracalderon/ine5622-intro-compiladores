@@ -1,13 +1,21 @@
-# ine5622-intro-compiladores
+# INE5622 - INTRODUÇÃO A COMPILADORES (UFSC)
 
-Códigos para a construção de um analisador léxico (AL) e analisador sintático (AS) para uma linguagem.
+## Projeto em Equipe
 
-Para instalar os requisitos: make;
+Este repositório foi criado por uma equipe de alunos da disciplina de Introdução a Compiladores, que faz parte do currículo da graduação de Bacharelado em Sistemas de Informação pela Universidade Federal de Santa Catarina (UFSC). A equipe foi composta por Barbara Calderon, Edmilson Domingues, Gabriel Nascimento, Luís Fernando Silveira e Martina Brehm.
 
-Para rodar em um ambiente virtual python o código: make run;
+## Analisador Léxico (AL) e Analisador Sintático (AS)
 
-O programa irá pedir para inserir qual arquivo você deseja executar. Insira o nome do arquivo junto com a extensão, exemplo: /tmp/dados_entrada.lcc ;
+Os códigos aqui apresentados são para a construção de um AL e AS para uma linguagem. 
 
-O resultado da análise aparecerá em seguida;
+### Instruções
 
-Para limpar o ambiente virtual python: make clean
+1. Para instalar os requisitos: `make`
+
+2. Para rodar o código em um ambiente virtual Python: `make run`
+
+3. O programa irá pedir para inserir qual arquivo você deseja executar. Insira o nome do arquivo junto com a extensão, exemplo: `/tmp/dados_entrada.lcc`
+
+4. O resultado da análise aparecerá em seguida
+
+5. Para limpar o ambiente virtual python: `make clean`
